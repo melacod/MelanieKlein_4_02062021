@@ -17,7 +17,7 @@ body {
   background-image: url("background.png");
   font-family: var(--font-default);
   font-size: 18px;
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -111,8 +111,6 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
-
-
 }
 
 .modal-btn {
@@ -167,6 +165,10 @@ main {
   width: 100%;
   overflow: auto;
   background-color: rgba(26, 39, 156, 0.4);
+}
+
+.modal-thanks{
+  display: none;
 }
 
 .content {
@@ -256,7 +258,7 @@ input[data-error]::after {
 .checkbox-label .checkbox-icon::after,
 .checkbox2-label .checkbox-icon::after {
   content: "";
-  width: 13px;
+  width: 14px;
   height: 13px;
   background-color: #279e7a;
   border-radius: 50%;
@@ -264,7 +266,7 @@ input[data-error]::after {
   white-space: nowrap;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 44.835%;
   transform: translate(-50%, -50%);
   transition: 0.3s;
   opacity: 0;
@@ -448,7 +450,6 @@ input[data-error]::after {
 }
 .btn-signup {
   outline: none;
-  text-transform: capitalize;
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
@@ -456,6 +457,7 @@ input[data-error]::after {
 }
 .hero-img {
   grid-column: span 8;
+  object-fit: cover;
 }
 .hero-img img {
   width: 100%;
