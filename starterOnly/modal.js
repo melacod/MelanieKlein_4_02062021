@@ -8,21 +8,23 @@ function editNav() {
 }
 
 // DOM Elements
-const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
-const closeBtn = document.querySelector(".close");
+const modalbg = document.getElementsByClassName('bground').item(0);
+const modalBtn = document.getElementsByClassName('modal-btn');
+const formData = document.getElementsByClassName('formData');
+const closeBtn = document.getElementsByClassName('close').item(0);
 
-const inputFirst = document.querySelector("#first");
-const inputLast = document.querySelector("#last");
-const inputEmail = document.querySelector("#email");
-const inputQuantity = document.querySelector("#quantity");
-const inputConditionGenerales = document.querySelector("#checkbox1");
+const inputFirst = document.getElementById("first");
+const inputLast = document.getElementById("last");
+const inputEmail = document.getElementById("email");
+const inputQuantity = document.getElementById("quantity");
+const inputConditionGenerales = document.getElementById("checkbox1");
 
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+for (let btn of modalBtn) {
+  btn.addEventListener("click", launchModal);
+}
 
-//close modal event
+// close modal event
 closeBtn.addEventListener("click", closeModal);
 
 // launch modal form
