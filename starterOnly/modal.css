@@ -529,3 +529,7 @@ footer {
   }
 }
 
+
+.invalid{
+  border: #f00 solid;
+}
