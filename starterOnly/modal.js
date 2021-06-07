@@ -24,13 +24,13 @@ for (let btn of modalBtn) {
   btn.addEventListener("click", launchModal);
 }
 
-// close modal event
-closeBtn.addEventListener("click", closeModal);
-
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
 }
+
+// close modal event
+closeBtn.addEventListener("click", closeModal);
 
 //close modal form
 function closeModal() {
@@ -52,10 +52,18 @@ function validate () {
   const quantityValid = validateNumber(inputQuantity.value);
   checkIfValid(quantityValid, inputQuantity);
 
-  const checkbox1Valid = validateCheckbox(inputConditionGenerales.checked);
+  const checkbox1Valid = inputConditionGenerales.checked;
   checkIfValid(checkbox1Valid, inputConditionGenerales);
   
   return firstValid && lastValid && emailValid && quantityValid && checkbox1Valid;
+}
+
+
+// validate text format
+function validateText (text) {
+  
+  return test.trim().length >= 2;
+
 }
 
 // validate email format
@@ -73,22 +81,6 @@ function validateNumber (num) {
     return false;
   }
   return true;
-}
-
-// validate text format
-function validateText (text) {
-  if (text.trim().length >= 2) {
-    return true;
-  }
-  return false;
-}
-
-//check checkbox1 validate
-function validateCheckbox (check) {
-  if (check) {
-    return true;
-  }
-  return false;
 }
 
 // add class 'invalid' depending of validity
