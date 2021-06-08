@@ -529,7 +529,16 @@ footer {
   }
 }
 
+span.error {
+  display: none;
+}
 
-.invalid{
-  border: #f00 solid;
+.invalid > input, .invalid.formValidation {
+  border: #f00 solid 3px;
+}
+
+.invalid > span.error {
+  display: initial;
+  color: red;
+  font-size: 0.8rem;
 }

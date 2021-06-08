@@ -13,6 +13,8 @@ const modalBtn = document.getElementsByClassName('modal-btn');
 const formData = document.getElementsByClassName('formData');
 const closeBtn = document.getElementsByClassName('close').item(0);
 
+const inputLocation = document.getElementsByClassName('input-location');
+
 const inputFirst = document.getElementById("first");
 const inputLast = document.getElementById("last");
 const inputEmail = document.getElementById("email");
@@ -40,29 +42,42 @@ function closeModal() {
 // validate form
 function validate () {
 
+  let isValid = true;
+
   const firstValid = validateText(inputFirst.value);
-  checkIfValid(firstValid, inputFirst);
+  checkIfValid(firstValid, inputFirst.parentElement);
+  isValid = isValid && firstValid;
 
   const lastValid = validateText(inputLast.value);
-  checkIfValid(lastValid, inputLast);
-  
+  checkIfValid(lastValid, inputLast.parentElement);
+  isValid = isValid && lastValid;
+
   const emailValid = validateEmail(inputEmail.value);
-  checkIfValid(emailValid, inputEmail);
+  checkIfValid(emailValid, inputEmail.parentElement);
+  isValid = isValid && emailValid;
 
   const quantityValid = validateNumber(inputQuantity.value);
-  checkIfValid(quantityValid, inputQuantity);
+  checkIfValid(quantityValid, inputQuantity.parentElement);
+  isValid = isValid && quantityValid;
 
-  const checkbox1Valid = inputConditionGenerales.checked;
-  checkIfValid(checkbox1Valid, inputConditionGenerales);
+  if (quantityValid) {
+    const locationValid = checkedLocation();
+    checkIfValid(locationValid, inputLocation.item(0).parentElement);
+    isValid = isValid && locationValid;
+  }
   
-  return firstValid && lastValid && emailValid && quantityValid && checkbox1Valid;
+  const checkbox1Valid = inputConditionGenerales.checked;
+  checkIfValid(checkbox1Valid, inputConditionGenerales.parentElement);
+  isValid = isValid && checkbox1Valid;
+
+  return isValid;
 }
 
 
 // validate text format
 function validateText (text) {
   
-  return test.trim().length >= 2;
+  return text.trim().length >= 2;
 
 }
 
@@ -83,12 +98,38 @@ function validateNumber (num) {
   return true;
 }
 
-// add class 'invalid' depending of validity
-function checkIfValid (isValid, input) {
-  if (isValid === true) {
-    input.classList.remove("invalid");
+// check if any location is checked depending on quantity
+function checkedLocation () {
+  if (inputQuantity.value > 0){
+    for (let location of inputLocation){
+      if (location.checked){
+        return true;
+      }
+    }
+    return false;
   } else {
-    input.classList.add("invalid");
+    for (let location of inputLocation){
+      location.checked = false;
+    }
+    return true;
   }
 }
+
+// add class 'invalid' depending of validity
+function checkIfValid (isValid, element) {
+  if (isValid === true) {
+    element.classList.remove("invalid");
+  } else {
+    element.classList.add("invalid");
+  }
+}
+
+// fonction calcul âge
+
+function getAge(date) { 
+  var diff = Date.now() - date.getTime();
+  var age = new Date(diff); 
+  return Math.abs(age.getUTCFullYear() - 1970);
+}
+alert(getAge(new Date(1995, 12, 6))); //Date(année, mois, jour) 
 
