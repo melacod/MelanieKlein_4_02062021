@@ -18,6 +18,7 @@ const inputLocation = document.getElementsByClassName('input-location');
 const inputFirst = document.getElementById("first");
 const inputLast = document.getElementById("last");
 const inputEmail = document.getElementById("email");
+const inputBirthdate = document.getElementById("birthdate");
 const inputQuantity = document.getElementById("quantity");
 const inputConditionGenerales = document.getElementById("checkbox1");
 
@@ -56,12 +57,16 @@ function validate () {
   checkIfValid(emailValid, inputEmail.parentElement);
   isValid = isValid && emailValid;
 
+  const birthdatelValid = validateDate(inputBirthdate.value);
+  checkIfValid(birthdatelValid, inputBirthdate.parentElement);
+  isValid = isValid && birthdatelValid;
+
   const quantityValid = validateNumber(inputQuantity.value);
   checkIfValid(quantityValid, inputQuantity.parentElement);
   isValid = isValid && quantityValid;
 
   if (quantityValid) {
-    const locationValid = checkedLocation();
+    const locationValid = validateLocation();
     checkIfValid(locationValid, inputLocation.item(0).parentElement);
     isValid = isValid && locationValid;
   }
@@ -99,7 +104,7 @@ function validateNumber (num) {
 }
 
 // check if any location is checked depending on quantity
-function checkedLocation () {
+function validateLocation () {
   if (inputQuantity.value > 0){
     for (let location of inputLocation){
       if (location.checked){
@@ -125,11 +130,14 @@ function checkIfValid (isValid, element) {
 }
 
 // fonction calcul âge
-
 function getAge(date) { 
   var diff = Date.now() - date.getTime();
   var age = new Date(diff); 
   return Math.abs(age.getUTCFullYear() - 1970);
 }
-alert(getAge(new Date(1995, 12, 6))); //Date(année, mois, jour) 
+//alert(getAge(new Date(1995, 12, 6))); //Date(année, mois, jour) 
 
+function validateDate (date) {
+  return isNaN(Date.parse(date)) == false;
+
+}
