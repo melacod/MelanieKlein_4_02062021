@@ -530,15 +530,19 @@ footer {
   }
 }
 
-span.error {
+span.error, span.error2 {
   display: none;
 }
 
-.invalid > input, .invalid.formValidation {
+.invalid > input, 
+.invalid.formValidation,
+.invalid2 > input, 
+.invalid2.formValidation {
   border: #f00 solid 3px;
 }
 
-.invalid > span.error {
+.invalid > span.error,
+.invalid2 > span.error2 {
   display: initial;
   color: red;
   font-size: 0.8rem;

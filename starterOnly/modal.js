@@ -42,48 +42,51 @@ function closeModal() {
 
 // validate form
 function validate () {
-
+  console.log('validate .. ');
   let isValid = true;
 
   const firstValid = validateText(inputFirst.value);
-  checkIfValid(firstValid, inputFirst.parentElement);
+  addOrRemoveInvalid(firstValid, inputFirst.parentElement);
   isValid = isValid && firstValid;
 
   const lastValid = validateText(inputLast.value);
-  checkIfValid(lastValid, inputLast.parentElement);
+  addOrRemoveInvalid(lastValid, inputLast.parentElement);
   isValid = isValid && lastValid;
 
   const emailValid = validateEmail(inputEmail.value);
-  checkIfValid(emailValid, inputEmail.parentElement);
+  addOrRemoveInvalid(emailValid, inputEmail.parentElement);
   isValid = isValid && emailValid;
 
   const birthdatelValid = validateDate(inputBirthdate.value);
-  checkIfValid(birthdatelValid, inputBirthdate.parentElement);
+  addOrRemoveInvalid(birthdatelValid, inputBirthdate.parentElement);
   isValid = isValid && birthdatelValid;
-
+  
+  if (birthdatelValid) {
+    const ageValid = validateAge(inputBirthdate.value);
+    addOrRemoveInvalid2(ageValid, inputBirthdate.parentElement);
+    isValid = isValid && ageValid;
+  }
+  
   const quantityValid = validateNumber(inputQuantity.value);
-  checkIfValid(quantityValid, inputQuantity.parentElement);
+  addOrRemoveInvalid(quantityValid, inputQuantity.parentElement);
   isValid = isValid && quantityValid;
 
   if (quantityValid) {
     const locationValid = validateLocation();
-    checkIfValid(locationValid, inputLocation.item(0).parentElement);
+    addOrRemoveInvalid(locationValid, inputLocation.item(0).parentElement);
     isValid = isValid && locationValid;
   }
   
   const checkbox1Valid = inputConditionGenerales.checked;
-  checkIfValid(checkbox1Valid, inputConditionGenerales.parentElement);
+  addOrRemoveInvalid(checkbox1Valid, inputConditionGenerales.parentElement);
   isValid = isValid && checkbox1Valid;
 
   return isValid;
 }
 
-
 // validate text format
 function validateText (text) {
-  
   return text.trim().length >= 2;
-
 }
 
 // validate email format
@@ -94,13 +97,7 @@ function validateEmail (email) {
 
 // validate number format
 function validateNumber (num) {
-  if (num === '') {
-    return false;
-  }
-  if (isNaN(num) === true) {
-    return false;
-  }
-  return true;
+  return num !== '' && isNaN(num) === false;
 }
 
 // check if any location is checked depending on quantity
@@ -120,24 +117,41 @@ function validateLocation () {
   }
 }
 
-// add class 'invalid' depending of validity
-function checkIfValid (isValid, element) {
-  if (isValid === true) {
-    element.classList.remove("invalid");
-  } else {
-    element.classList.add("invalid");
-  }
+// validate date format
+function validateDate (date) {
+  return isNaN(Date.parse(date)) == false;
+}
+
+// validate age
+function validateAge (date) {
+  return getAge(date) >= 13;
 }
 
 // fonction calcul âge
-function getAge(date) { 
-  var diff = Date.now() - date.getTime();
-  var age = new Date(diff); 
-  return Math.abs(age.getUTCFullYear() - 1970);
+// Date.now() => nombre de milisseconds entre le 01/01/1970 et maintenant
+// Date.parse(date).getTime()  => nombre de milisseconds entre le 01/01/1970 et la date
+function getAge (date) { 
+  var diff = Date.now() - new Date(Date.parse(date)).getTime();
+  var age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
+  // console.log('date =  '+date+ ' => age = '+age);
+  return age;
 }
-//alert(getAge(new Date(1995, 12, 6))); //Date(année, mois, jour) 
 
-function validateDate (date) {
-  return isNaN(Date.parse(date)) == false;
+// add class 'invalid' depending of validity
+function addOrRemoveInvalid (isValid, element) {
+  addOrRemoveClass(isValid, element, "invalid");
+}
 
+// add class 'invalid2' depending of validity
+function addOrRemoveInvalid2 (isValid, element) {
+  addOrRemoveClass(isValid, element, "invalid2");
+}
+
+// add class depending of validity
+function addOrRemoveClass (isValid, element, className) {
+  if (isValid === true) {
+    element.classList.remove(className);
+  } else {
+    element.classList.add(className);
+  }
 }
