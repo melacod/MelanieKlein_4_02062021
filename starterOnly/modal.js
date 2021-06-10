@@ -128,8 +128,8 @@ function validateAge (date) {
 }
 
 // fonction calcul âge
-// Date.now() => nombre de milisseconds entre le 01/01/1970 et maintenant
-// Date.parse(date).getTime()  => nombre de milisseconds entre le 01/01/1970 et la date
+// Date.now() => nombre de millisseconds entre le 01/01/1970 et maintenant
+// Date.parse(date).getTime()  => nombre de millisseconds entre le 01/01/1970 et la date
 function getAge (date) { 
   var diff = Date.now() - new Date(Date.parse(date)).getTime();
   var age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
