@@ -99,9 +99,6 @@ img {
     display: block;
     color: #ff0000;
   }
-  body{
-    margin: 8%;
-  }
 } 
 
 main {
@@ -485,6 +482,11 @@ footer {
 }
 @media screen and (max-width: 800px) {
 
+  
+  body{
+    margin: 8%;
+  }
+
   .hero-section {
     display: block;
     box-shadow: unset;
@@ -501,7 +503,8 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 2.5rem;
+    padding-top: 10px;
+    font-size: 2.3rem;
     font-weight: 800;
     white-space: normal;
   }
@@ -510,16 +513,18 @@ footer {
     font-size: 0.9rem;
     margin-top: 35px;
     font-weight: 500;
-  }
-  .hero-img  {
-    height: 340px;
+    padding-inline-end: 9%;  }
+
+  .hero-img > img  {
+    height: 320px;
+    max-width: calc(100%-60px);
     object-fit: cover;
     margin-top: 40px;
     position: center;
   }
-
+  
   img{
-    width: 102px;
+    width: 150px;
     align-items: center;
     border-radius: 15px;
   }
@@ -529,8 +534,9 @@ footer {
     margin: 32px auto 10px;
     padding: 12px 35px;
   }
+
   .copyrights {
-    margin-top: 50px;
+    margin-top: 10px;
     text-align: center;
   }
 
