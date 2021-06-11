@@ -42,7 +42,6 @@ function closeModal() {
 
 // validate form
 function validate () {
-  console.log('validate .. ');
   let isValid = true;
 
   const firstValid = validateText(inputFirst.value);
@@ -89,7 +88,7 @@ function validateText (text) {
   return text.trim().length >= 2;
 }
 
-// validate email format
+// validate email format with regular expression
 function validateEmail (email) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
@@ -118,6 +117,7 @@ function validateLocation () {
 }
 
 // validate date format
+// Date.parse(xxx) return NaN when xxx is not a valid date
 function validateDate (date) {
   return isNaN(Date.parse(date)) == false;
 }
@@ -127,7 +127,7 @@ function validateAge (date) {
   return getAge(date) >= 13;
 }
 
-// fonction calcul âge
+// Compute age from date
 // Date.now() => nombre de millisseconds entre le 01/01/1970 et maintenant
 // Date.parse(date).getTime()  => nombre de millisseconds entre le 01/01/1970 et la date
 function getAge (date) { 
@@ -147,7 +147,8 @@ function addOrRemoveInvalid2 (isValid, element) {
   addOrRemoveClass(isValid, element, "invalid2");
 }
 
-// add class depending of validity
+// add className to element if isValid is true
+// else remove className from element
 function addOrRemoveClass (isValid, element, className) {
   if (isValid === true) {
     element.classList.remove(className);
