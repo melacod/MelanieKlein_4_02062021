@@ -66,7 +66,7 @@ function validate () {
     isValid = isValid && ageValid;
   }
   
-  const quantityValid = validateNumber(inputQuantity.value);
+  const quantityValid = isNaN(inputQuantity.value) === false;
   addOrRemoveInvalid(quantityValid, inputQuantity.parentElement);
   isValid = isValid && quantityValid;
 
@@ -94,11 +94,6 @@ function validateEmail (email) {
   return re.test(String(email).toLowerCase());
 }
 
-// validate number format
-function validateNumber (num) {
-  return num !== '' && isNaN(num) === false;
-}
-
 // check if any location is checked depending on quantity
 function validateLocation () {
   if (inputQuantity.value > 0){
@@ -110,6 +105,8 @@ function validateLocation () {
     return false;
   } else {
     for (let location of inputLocation){
+
+      //1 élement checké = tout le monde checké et réciproquement
       location.checked = false;
     }
     return true;
@@ -124,6 +121,8 @@ function validateDate (date) {
 
 // validate age
 function validateAge (date) {
+  //let diff = Date.now() - new Date(Date.parse(date)).getTime();
+  //let age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
   return getAge(date) >= 13;
 }
 
@@ -131,8 +130,8 @@ function validateAge (date) {
 // Date.now() => nombre de millisseconds entre le 01/01/1970 et maintenant
 // Date.parse(date).getTime()  => nombre de millisseconds entre le 01/01/1970 et la date
 function getAge (date) { 
-  var diff = Date.now() - new Date(Date.parse(date)).getTime();
-  var age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
+  let diff = Date.now() - new Date(Date.parse(date)).getTime();
+  let age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
   // console.log('date =  '+date+ ' => age = '+age);
   return age;
 }
@@ -150,9 +149,13 @@ function addOrRemoveInvalid2 (isValid, element) {
 // add className to element if isValid is true
 // else remove className from element
 function addOrRemoveClass (isValid, element, className) {
-  if (isValid === true) {
+  if (isValid) {
     element.classList.remove(className);
   } else {
     element.classList.add(className);
   }
+
+ // isValid ? element.classList.remove(className) : element.classList.add(className);
 }
+
+
