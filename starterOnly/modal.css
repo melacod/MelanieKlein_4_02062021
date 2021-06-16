@@ -546,6 +546,12 @@ footer {
   }
 }
 
+.disabledLocations {
+ background: gray;
+ opacity: 0.1;
+ border-radius:10px;
+}
+
 @keyframes modalopen {
   from {
     opacity: 0;

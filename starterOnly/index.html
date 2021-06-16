@@ -39,21 +39,21 @@
         Vous aimez jouer ? Notre prochain évènement gaming est ouvert
         aux réservations... Places limitées !
       </p>
-      <button class="btn-signup modal-btn">
+      <button class="btn-signup modal-open">
         Je m'inscris
       </button>
     </div>
     <div class="hero-img">
       <img src="./bg_img.jpg" alt="img" />
     </div>
-    <button class="btn-signup modal-btn">
+    <button class="btn-signup modal-open">
       je m'inscris
     </button>
   </section>
 
   <div class="bground">
     <div class="content">
-      <span class="close"></span>
+      <span class="close modal-close"></span>
       <aside class="modal-body">
         <form name="reserve" action="index.html" method="get" onsubmit="return validate();" novalidate>
           <div class="formData">
@@ -83,34 +83,37 @@
             <input type="number" class="text-control number" id="quantity" name="quantity" min="0" max="99">
             <span class="error">Quantité invalide!</span><br>
           </div>
-          <p class="text-label">Quelle(s) ville(s) ?</p>
-          <div class="formData formValidation">
-            <input class="checkbox-input input-location" type="radio" id="location1" name="location" value="New York" />
-            <label class="checkbox-label" for="location1">
-              <span class="checkbox-icon"></span>
-              New York</label>
-            <input class="checkbox-input input-location" type="radio" id="location2" name="location" value="San Francisco" />
-            <label class="checkbox-label" for="location2">
-              <span class="checkbox-icon"></span>
-              San Francisco</label>
-            <input class="checkbox-input input-location" type="radio" id="location3" name="location" value="Seattle" />
-            <label class="checkbox-label" for="location3">
-              <span class="checkbox-icon"></span>
-              Seattle</label>
-            <input class="checkbox-input input-location" type="radio" id="location4" name="location" value="Chicago" />
-            <label class="checkbox-label" for="location4">
-              <span class="checkbox-icon"></span>
-              Chicago</label>
-            <input class="checkbox-input input-location" type="radio" id="location5" name="location" value="Boston" />
-            <label class="checkbox-label" for="location5">
-              <span class="checkbox-icon"></span>
-              Boston</label>
-            <input class="checkbox-input input-location" type="radio" id="location6" name="location" value="Portland" />
-            <label class="checkbox-label" for="location6">
-              <span class="checkbox-icon"></span>
-              Portland</label>
-            <span class="error"><br/>Merci de sélectionner la(les) ville(s) du tournoi auquel vous avez déjà participé!</span><br>
-          </div>
+          <div id="locations" class="disabledLocations">
+            <p class="text-label">Quelle(s) ville(s) ?</p>
+            <div id="locationsGroup" class="formData formValidation">
+              <input class="checkbox-input input-location" type="checkbox" id="location1" name="location" value="New York" />
+              <label class="checkbox-label" for="location1">
+                <span class="checkbox-icon"></span>
+                New York</label>
+              <input class="checkbox-input input-location" type="checkbox" id="location2" name="location" value="San Francisco" />
+              <label class="checkbox-label" for="location2">
+                <span class="checkbox-icon"></span>
+                San Francisco</label>
+              <input class="checkbox-input input-location" type="checkbox" id="location3" name="location" value="Seattle" />
+              <label class="checkbox-label" for="location3">
+                <span class="checkbox-icon"></span>
+                Seattle</label>
+              <input class="checkbox-input input-location" type="checkbox" id="location4" name="location" value="Chicago" />
+              <label class="checkbox-label" for="location4">
+                <span class="checkbox-icon"></span>
+                Chicago</label>
+              <input class="checkbox-input input-location" type="checkbox" id="location5" name="location" value="Boston" />
+              <label class="checkbox-label" for="location5">
+                <span class="checkbox-icon"></span>
+                Boston</label>
+              <input class="checkbox-input input-location" type="checkbox" id="location6" name="location" value="Portland" />
+              <label class="checkbox-label" for="location6">
+                <span class="checkbox-icon"></span>
+                Portland</label>
+              <span class="error"><br/>Merci de sélectionner la(les) ville(s) du tournoi auquel vous avez déjà participé!<br></span>
+              <span class="error2"><br/>Merci de sélectionner uniquement la(les) ville(s) du tournoi auquel vous avez déjà participé!<br></span>
+            </div>
+        </div>
 
           <div class="formData">
             <input class="checkbox-input" type="checkbox" id="checkbox1" checked />
@@ -128,10 +131,10 @@
           </div>
           <input class="btn-submit button" type="submit" value="C'est parti" />
         </form>
-      </aside>
-      <aside class="modal-thanks">
-        <span>Merci de vous être inscrit</span>
-        <input class="btn-thanks button" type="submit" value="Fermer" />
+        <div class="modal-thanks">
+          <span>Merci de vous être inscrit</span>
+          <input class="button modal-close" type="submit" value="Fermer" />
+        </div>
       </aside>
     </div>
   </div>

@@ -7,123 +7,185 @@ function editNav() {
   }
 }
 
+// ---------------------------------------------------------------------------------------------------------
+// DOM elements
+// ---------------------------------------------------------------------------------------------------------
+
 // DOM Elements
 const modalbg = document.getElementsByClassName('bground').item(0);
-const modalBtn = document.getElementsByClassName('modal-btn');
-const formData = document.getElementsByClassName('formData');
-const closeBtn = document.getElementsByClassName('close').item(0);
+const modalForm = modalbg.querySelector('form');
+const modalThanks = modalbg.querySelector('.modal-thanks');
+const modalOpenButtons = document.getElementsByClassName('modal-open');
+const modalCloseButtons = document.getElementsByClassName('modal-close');
 
-const inputLocation = document.getElementsByClassName('input-location');
-
+// DOM inputs elements
 const inputFirst = document.getElementById("first");
 const inputLast = document.getElementById("last");
 const inputEmail = document.getElementById("email");
 const inputBirthdate = document.getElementById("birthdate");
 const inputQuantity = document.getElementById("quantity");
-const inputConditionGenerales = document.getElementById("checkbox1");
+const inputLocations = document.getElementsByClassName('input-location');
+const inputTermsConditions = document.getElementById("checkbox1");
 
-// launch modal event
-for (let btn of modalBtn) {
-  btn.addEventListener("click", launchModal);
+// DOM location elements
+const locations = document.getElementById('locations');
+const locationsGroup = document.getElementById('locationsGroup');
+
+// ---------------------------------------------------------------------------------------------------------
+// add listeners to DOM elements
+// ---------------------------------------------------------------------------------------------------------
+
+// add listener events for input validation
+addListenerMulti(inputFirst, "change keyup", validateFirst);
+addListenerMulti(inputLast, "change keyup", validateLast);
+addListenerMulti(inputEmail, "change keyup", validateEmail);
+addListenerMulti(inputBirthdate, "change keyup", validateBirthdate);
+addListenerMulti(inputQuantity, "change keyup", validateQuantity);
+addListenerMulti(inputTermsConditions, "change keyup", validateTermsAndConditions);
+for (let inputLocation of inputLocations) {
+  addListenerMulti(inputLocation, "click", validateLocations);
 }
 
-// launch modal form
-function launchModal() {
+// add listener events to modal
+for (let btn of modalOpenButtons) {
+  addListenerMulti(btn, "click", openModalDialog);
+}
+for (let btn of modalCloseButtons) {
+  addListenerMulti(btn, "click", closeModalDialog);
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// modal open, close, navigation
+// ---------------------------------------------------------------------------------------------------------
+
+// open modal dialog
+function openModalDialog() {
   modalbg.style.display = "block";
+  modalForm.style.display = "initial";
+  modalThanks.style.display = "none";
 }
 
-// close modal event
-closeBtn.addEventListener("click", closeModal);
-
-//close modal form
-function closeModal() {
+// close modal dialog
+function closeModalDialog() {
   modalbg.style.display = "none";
 }
 
-// validate form
+// display modal dialog success message
+function displaySucessModalDialog() {
+  modalForm.style.display = "none";
+  modalThanks.style.display = "initial";
+  resetFields();
+}
+
+// reset all fields to blanks
+function resetFields () {
+  inputFirst.value = '';
+  inputLast.value = '';
+  inputEmail.value = '';
+  inputBirthdate.value = '';
+  inputQuantity.value = '';
+  uncheckAllLocations();
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// validate when submit form
+// ---------------------------------------------------------------------------------------------------------
+
+// validate form : 2 behaviors possible => validateAll / validateByStep
 function validate () {
-  let isValid = true;
-
-  const firstValid = validateText(inputFirst.value);
-  addOrRemoveInvalid(firstValid, inputFirst.parentElement);
-  isValid = isValid && firstValid;
-
-  const lastValid = validateText(inputLast.value);
-  addOrRemoveInvalid(lastValid, inputLast.parentElement);
-  isValid = isValid && lastValid;
-
-  const emailValid = validateEmail(inputEmail.value);
-  addOrRemoveInvalid(emailValid, inputEmail.parentElement);
-  isValid = isValid && emailValid;
-
-  const birthdatelValid = validateDate(inputBirthdate.value);
-  addOrRemoveInvalid(birthdatelValid, inputBirthdate.parentElement);
-  isValid = isValid && birthdatelValid;
-  
-  if (birthdatelValid) {
-    const ageValid = validateAge(inputBirthdate.value);
-    addOrRemoveInvalid2(ageValid, inputBirthdate.parentElement);
-    isValid = isValid && ageValid;
+  // let isValid = validateByStep();
+  let isValid = validateAll();
+  if (isValid) {
+    displaySucessModalDialog();
   }
-  
-  const quantityValid = isNaN(inputQuantity.value) === false;
-  addOrRemoveInvalid(quantityValid, inputQuantity.parentElement);
-  isValid = isValid && quantityValid;
+  return false;
+}
 
-  if (quantityValid) {
-    const locationValid = validateLocation();
-    addOrRemoveInvalid(locationValid, inputLocation.item(0).parentElement);
-    isValid = isValid && locationValid;
+// stop when first validate return false : validation by step
+function validateByStep () {
+  return validateFirst() 
+    && validateLast() 
+    && validateEmail() 
+    && validateBirthdate() 
+    && validateQuantity() 
+    && validateTermsAndConditions();
+}
+
+// validate all fields
+function validateAll () {
+  let isValidFirst = validateFirst();
+  let isValidLast = validateLast();
+  let isValidEmail = validateEmail();
+  let isValidBirthdate = validateBirthdate();
+  let isValidQuantity = validateQuantity();
+  let isValidTermsConditions = validateTermsAndConditions();
+  return isValidFirst && isValidLast && isValidEmail && isValidBirthdate && isValidQuantity && isValidTermsConditions;
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// validate first, last, email, birthdate, terms and conditions
+// ---------------------------------------------------------------------------------------------------------
+
+// validate first name: at least 2 characters
+function validateFirst () {
+  removeValidationClasses(inputFirst.parentElement);
+  const isValid = validateTextFormat(inputFirst.value);
+  if (!isValid) {
+    addInvalidClass(inputFirst.parentElement);
   }
-  
-  const checkbox1Valid = inputConditionGenerales.checked;
-  addOrRemoveInvalid(checkbox1Valid, inputConditionGenerales.parentElement);
-  isValid = isValid && checkbox1Valid;
-
   return isValid;
 }
 
-// validate text format
-function validateText (text) {
+// validate last name: at least 2 characters
+function validateLast () {
+  removeValidationClasses(inputLast.parentElement);
+  const isValid = validateTextFormat(inputLast.value);
+  if (!isValid) {
+    addInvalidClass(inputLast.parentElement);
+  }
+  return isValid;
+}
+
+// validate text format: at least 2 characters
+function validateTextFormat (text) {
   return text.trim().length >= 2;
 }
 
+// validate email format
+function validateEmail () {
+  removeValidationClasses(inputEmail.parentElement);
+  const isValid = validateEmailFormat(inputEmail.value);
+  if (!isValid) {
+    addInvalidClass(inputEmail.parentElement);
+  }
+  return isValid;
+}
+
 // validate email format with regular expression
-function validateEmail (email) {
+function validateEmailFormat (email) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
 
-// check if any location is checked depending on quantity
-function validateLocation () {
-  if (inputQuantity.value > 0){
-    for (let location of inputLocation){
-      if (location.checked){
-        return true;
-      }
-    }
-    return false;
+// validate birthdate
+function validateBirthdate () {
+  removeValidationClasses(inputBirthdate.parentElement);
+  let isValid = validateDateFormat(inputBirthdate.value);
+  if (!isValid) {
+    addInvalidClass(inputBirthdate.parentElement);
   } else {
-    for (let location of inputLocation){
-
-      //1 élement checké = tout le monde checké et réciproquement
-      location.checked = false;
+    isValid = getAge(inputBirthdate.value) >= 13;
+    if (!isValid) {
+      addInvalid2Class(inputBirthdate.parentElement); 
     }
-    return true;
   }
+  return isValid;
 }
 
 // validate date format
 // Date.parse(xxx) return NaN when xxx is not a valid date
-function validateDate (date) {
+function validateDateFormat (date) {
   return isNaN(Date.parse(date)) == false;
-}
-
-// validate age
-function validateAge (date) {
-  //let diff = Date.now() - new Date(Date.parse(date)).getTime();
-  //let age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
-  return getAge(date) >= 13;
 }
 
 // Compute age from date
@@ -132,30 +194,124 @@ function validateAge (date) {
 function getAge (date) { 
   let diff = Date.now() - new Date(Date.parse(date)).getTime();
   let age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
-  // console.log('date =  '+date+ ' => age = '+age);
   return age;
 }
 
-// add class 'invalid' depending of validity
-function addOrRemoveInvalid (isValid, element) {
-  addOrRemoveClass(isValid, element, "invalid");
+// validate terms and conditions
+function validateTermsAndConditions () {
+  removeValidationClasses(inputTermsConditions.parentElement);
+  const isValid = inputTermsConditions.checked;
+  if (!isValid) {
+    addInvalidClass(inputTermsConditions.parentElement);
+  }
+  return isValid;
 }
 
-// add class 'invalid2' depending of validity
-function addOrRemoveInvalid2 (isValid, element) {
-  addOrRemoveClass(isValid, element, "invalid2");
-}
+// ---------------------------------------------------------------------------------------------------------
+// validate quantity and locations
+// ---------------------------------------------------------------------------------------------------------
 
-// add className to element if isValid is true
-// else remove className from element
-function addOrRemoveClass (isValid, element, className) {
-  if (isValid) {
-    element.classList.remove(className);
+// validate quantity and locations
+function validateQuantity () {
+
+  disableLocations();
+  removeValidationClasses(inputQuantity.parentElement);
+  removeValidationClasses(locationsGroup);
+  
+  let isValid = isNaN(inputQuantity.value) === false && inputQuantity.value !== '';
+  if (!isValid) {
+
+    // invalid quantity (NaN) : invalid message on quantity + locations disabled
+    addInvalidClass(inputQuantity.parentElement); 
+
+  } else if (parseInt(inputQuantity.value) === 0){
+
+    // valid quantity = 0 : uncheck all locations + locations disabled
+    uncheckAllLocations();
+
   } else {
-    element.classList.add(className);
+
+    // valid quantity > 0 : enable locations + validate if one location checked
+    enableLocations();
+    isValid = validateLocations();
+    
+  }
+  return isValid;
+}
+
+// disable locations: no location can be choosen
+function disableLocations () {
+  locations.classList.add("disabledLocations");
+}
+
+// enable locations: location can be choosen
+function enableLocations () {
+  locations.classList.remove("disabledLocations");
+}
+
+// uncheck all locations: to use when quantity is 0
+function uncheckAllLocations () {
+  for (let location of inputLocations){
+    location.checked = false;
+  }
+}
+
+// validation locations: number of locations checked must be
+function validateLocations () {
+  removeValidationClasses(locationsGroup);
+  
+  let numberOfLocationsChecked = 0;
+  for (let location of inputLocations){
+    if (location.checked){
+      numberOfLocationsChecked++;
+    }
   }
 
- // isValid ? element.classList.remove(className) : element.classList.add(className);
+  let isValid = numberOfLocationsChecked >= 1;
+  if (!isValid) {
+    // at least 1 : several events in same town
+    addInvalidClass(locationsGroup);
+
+  } else {
+    
+    let quantity = parseInt(inputQuantity.value);
+    isValid = numberOfLocationsChecked <= quantity;
+    if (!isValid) {
+      // no more than quantity : event in only one town
+      addInvalid2Class(locationsGroup);
+    }
+
+  }
+  return isValid;
 }
 
+// ---------------------------------------------------------------------------------------------------------
+// validation classes
+// ---------------------------------------------------------------------------------------------------------
 
+// remove all validation classes from element
+function removeValidationClasses (element) {
+  element.classList.remove('invalid', 'invalid2');
+}
+
+// add invalid class to element
+function addInvalidClass (element) {
+  element.classList.add('invalid');
+}
+
+// add invalid2 class to element
+function addInvalid2Class (element) {
+  element.classList.add('invalid2');
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// listener utility method
+// ---------------------------------------------------------------------------------------------------------
+
+// add multiple event listener to element
+function addListenerMulti(element, eventNames, listener) {
+  const events = eventNames.split(' ');
+  for (let i=0, iLen=events.length; i<iLen; i++) {
+    element.addEventListener(events[i], listener, false);
+  }
+}
