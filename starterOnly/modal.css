@@ -45,8 +45,6 @@ img {
   display: block;
   color: #000000;
   text-align: center;
-  padding: 12px 12px;
-  margin: 5px;
   text-decoration: none;
   font-size: 20px;
   font-family: Roboto, sans-serif;
@@ -169,6 +167,24 @@ main {
 
 .modal-thanks{
   display: none;
+}
+
+.modal-thanks > span {
+  position: absolute;
+  margin: 0 auto;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.modal-thanks > input {
+  position: absolute;
+  margin: 0 auto;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .content {
