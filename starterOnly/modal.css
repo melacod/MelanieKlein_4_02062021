@@ -528,14 +528,13 @@ footer {
     width: unset;
     font-size: 0.9rem;
     margin-top: 35px;
-    font-weight: 500;
-    padding-inline-end: 9%;  }
+    font-weight: 500; }
 
   .hero-img > img  {
     height: 320px max;
     object-fit: cover;
     margin-top: 40px;
-    position: center;
+    position: unset;
   }
   
   img{
