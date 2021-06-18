@@ -61,7 +61,7 @@ for (let btn of modalCloseButtons) {
 // open modal dialog
 function openModalDialog() {
   modalbg.style.display = "block";
-  modalForm.style.display = "initial";
+  modalForm.style.visibility = "initial";
   modalThanks.style.display = "none";
 }
 
@@ -72,7 +72,7 @@ function closeModalDialog() {
 
 // display modal dialog success message
 function displaySucessModalDialog() {
-  modalForm.style.display = "none";
+  modalForm.style.visibility = "hidden";
   modalThanks.style.display = "initial";
   resetFields();
 }
@@ -91,24 +91,13 @@ function resetFields () {
 // validate when submit form
 // ---------------------------------------------------------------------------------------------------------
 
-// validate form : 2 behaviors possible => validateAll / validateByStep
+// validate form
 function validate () {
-  // let isValid = validateByStep();
-  let isValid = validateAll();
+  const isValid = validateAll();
   if (isValid) {
     displaySucessModalDialog();
   }
   return false;
-}
-
-// stop when first validate return false : validation by step
-function validateByStep () {
-  return validateFirst() 
-    && validateLast() 
-    && validateEmail() 
-    && validateBirthdate() 
-    && validateQuantity() 
-    && validateTermsAndConditions();
 }
 
 // validate all fields
