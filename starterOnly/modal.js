@@ -213,6 +213,7 @@ function validateQuantity () {
   removeValidationClasses(locationsGroup);
   
   let isValid = isNaN(inputQuantity.value) === false && inputQuantity.value !== '';
+  
   if (!isValid) {
 
     // invalid quantity (NaN) : invalid message on quantity + locations disabled
