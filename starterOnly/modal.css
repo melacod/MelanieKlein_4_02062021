@@ -45,6 +45,8 @@ img {
   display: block;
   color: #000000;
   text-align: center;
+  padding: 12px 12px;
+  margin: 5px;
   text-decoration: none;
   font-size: 20px;
   font-family: Roboto, sans-serif;
@@ -95,7 +97,6 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    color: #ff0000;
   }
 } 
 
