@@ -212,6 +212,7 @@ label {
   font-size: 17px;
   font-weight: normal;
   display: inline-block;
+  margin-top: 8px;
   margin-bottom: 11px;
 }
 input {
@@ -579,7 +580,7 @@ footer {
   }
 }
 
-span.error, span.error2 {
+div.error, div.error2 {
   display: none;
 }
 
@@ -590,9 +591,10 @@ span.error, span.error2 {
   border: #f00 solid 3px;
 }
 
-.invalid > span.error,
-.invalid2 > span.error2 {
-  display: initial;
+.invalid > div.error,
+.invalid2 > div.error2 {
+  display: block;
   color: red;
   font-size: 0.8rem;
+  padding: 5px 10px 5px 10px;
 }

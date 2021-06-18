@@ -59,29 +59,28 @@
           <div class="formData">
             <label for="first">Prénom</label><br>
             <input class="text-control" type="text" id="first" name="first" minlength="2" />
-            <span class="error">Veuillez entrer 2 caractères ou plus pour le champ du prénom.</span><br>
+            <div class="error">Veuillez entrer 2 caractères ou plus pour le champ du prénom.</div>
           </div>
           <div class="formData">
             <label for="last">Nom</label><br>
             <input class="text-control" type="text" id="last" name="last" minlength="2" />
-            <span class="error">Veuillez entrer 2 caractères ou plus pour le champ du nom.</span><br>
+            <div class="error">Veuillez entrer 2 caractères ou plus pour le champ du nom.</div>
           </div>
           <div class="formData">
             <label for="email">E-mail</label><br>
             <input class="text-control" type="email" id="email" name="email" />
-            <span class="error">Veuillez respecter le format email: exemple@domaine.fr </span><br>
+            <div class="error">Veuillez respecter le format email: exemple@domaine.fr </div>
           </div>
           <div class="formData">
             <label for="birthdate">Date de naissance</label><br>
             <input class="text-control" type="date" id="birthdate" max="2020-01-01" name="birthdate" />
-            <span class="error">Vous devez entrer votre date de naissance.</span>
-            <span class="error2">Vous devez avoir au minimun 13 ans pour participer.</span>
-            <br>
+            <div class="error">Vous devez entrer votre date de naissance.</div>
+            <div class="error2">Vous devez avoir au minimun 13 ans pour participer.</div>
           </div>
           <div class="formData">
-            <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
+            <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label>
             <input type="number" class="text-control number" id="quantity" name="quantity" min="0" max="99">
-            <span class="error">Quantité invalide!</span><br>
+            <div class="error">Quantité invalide!</div>
           </div>
           <div id="locations" class="disabledLocations">
             <p class="text-label">Quelle(s) ville(s) ?</p>
@@ -110,8 +109,8 @@
               <label class="checkbox-label" for="location6">
                 <span class="checkbox-icon"></span>
                 Portland</label>
-              <span class="error"><br/>Merci de sélectionner la(les) ville(s) du tournoi auquel vous avez déjà participé!<br></span>
-              <span class="error2"><br/>Merci de sélectionner uniquement la(les) ville(s) du tournoi auquel vous avez déjà participé!<br></span>
+              <div class="error">Merci de sélectionner la(les) ville(s) du tournoi auquel vous avez déjà participé!</div>
+              <div class="error2">Merci de sélectionner uniquement la(les) ville(s) du tournoi auquel vous avez déjà participé!</div>
             </div>
           </div>
           <div class="formData">
@@ -120,7 +119,7 @@
               <span class="checkbox-icon"></span>
               J'ai lu et accepté les conditions d'utilisation.
             </label>
-            <span class="error"><br/>Vous devez vérifier que vous acceptez les termes et conditions.</span><br>
+            <div class="error">Vous devez vérifier que vous acceptez les termes et conditions.</div>
             <input class="checkbox-input" type="checkbox" id="checkbox2" />
             <label class="checkbox2-label" for="checkbox2">
               <span class="checkbox-icon"></span>

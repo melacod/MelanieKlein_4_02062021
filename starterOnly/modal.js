@@ -14,6 +14,7 @@ function editNav() {
 // DOM Elements
 const modalbg = document.getElementsByClassName('bground').item(0);
 const modalForm = modalbg.querySelector('form');
+const checkBoxWithAnimate = modalForm.querySelectorAll('.checkbox-icon');
 const modalThanks = modalbg.querySelector('.modal-thanks');
 const modalOpenButtons = document.getElementsByClassName('modal-open');
 const modalCloseButtons = document.getElementsByClassName('modal-close');
@@ -72,6 +73,9 @@ function closeModalDialog() {
 
 // display modal dialog success message
 function displaySucessModalDialog() {
+  checkBoxWithAnimate.forEach( function (e) {
+    e.style.transitionDuration = "0s";
+  });
   modalForm.style.visibility = "hidden";
   modalThanks.style.display = "initial";
   resetFields();
@@ -93,8 +97,9 @@ function resetFields () {
 
 // validate form
 function validate () {
-  const isValid = validateAll();
+  const isValid = true;//validateAll();
   if (isValid) {
+    disableLocations();
     displaySucessModalDialog();
   }
   return false;
