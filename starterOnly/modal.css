@@ -14,7 +14,6 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1400px;
@@ -35,10 +34,10 @@ img {
   margin: 3.5%;
 }
 .header-logo {
-    float: left;
+  float: left;
 }
 .main-navbar {
-    float: right;
+  float: right;
 }
 .topnav a {
   float: left;
@@ -69,16 +68,21 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-  .topnav a {display: none;}
+  .topnav {
+    height: 60px;
+  }
+  .topnav a {
+    display: none;
+  }
   .topnav a.icon {
     float: right;
     display: block;
   }
-}
-
-@media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
+  .topnav.responsive {
+    position: relative;
+  }
   .topnav.responsive .icon {
+    display: none;
     position: absolute;
     right: 0;
     top: 0;
@@ -90,15 +94,31 @@ img {
   }
 }
 
-
-
- @media screen and (max-width: 850px) {
-  .topnav a {display: none;}
+@media screen and (max-width: 850px) {
+  .topnav a {
+    display: none;
+  }
   .topnav a.icon {
     float: right;
     display: block;
   }
-} 
+  .topnav.responsive .main-navbar {
+    position: fixed;
+    z-index: 10;
+    right: 60px;
+    top: 60px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 1px 1px 10px grey;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .topnav.responsive .main-navbar {
+    right: 40px;
+    top: 40px;
+  }
+}
 
 main {
   font-size: 130%;
@@ -166,7 +186,7 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
-.modal-thanks{
+.modal-thanks {
   display: none;
 }
 
@@ -497,9 +517,7 @@ footer {
   margin: 0 20px;
 }
 @media screen and (max-width: 850px) {
-
-  
-  body{
+  body {
     margin: 8%;
   }
 
@@ -528,21 +546,22 @@ footer {
     width: unset;
     font-size: 0.9rem;
     margin-top: 35px;
-    font-weight: 500; }
+    font-weight: 500;
+  }
 
-  .hero-img > img  {
+  .hero-img > img {
     height: 320px max;
     object-fit: cover;
     margin-top: 40px;
     position: unset;
   }
-  
-  img{
+
+  img {
     width: 150px;
     align-items: center;
     border-radius: 15px;
   }
-  
+
   .hero-section > .btn-signup {
     display: block;
     margin: 32px auto 10px;
@@ -553,7 +572,7 @@ footer {
     text-align: center;
   }
 
-  .topnav{
+  .topnav {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -563,9 +582,9 @@ footer {
 }
 
 .disabledLocations {
- background: gray;
- opacity: 0.1;
- border-radius:10px;
+  background: gray;
+  opacity: 0.1;
+  border-radius: 10px;
 }
 
 @keyframes modalopen {
@@ -578,13 +597,14 @@ footer {
   }
 }
 
-div.error, div.error2 {
+div.error,
+div.error2 {
   display: none;
 }
 
-.invalid > input, 
+.invalid > input,
 .invalid.formValidation,
-.invalid2 > input, 
+.invalid2 > input,
 .invalid2.formValidation {
   border: #f00 solid 3px;
 }

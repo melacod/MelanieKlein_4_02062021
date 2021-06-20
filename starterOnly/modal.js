@@ -1,17 +1,11 @@
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
 // ---------------------------------------------------------------------------------------------------------
 // DOM elements
 // ---------------------------------------------------------------------------------------------------------
 
-// DOM Elements
+// DOM menu element
+const topNav = document.getElementById("myTopnav");
+
+// DOM modal elements
 const modalbg = document.getElementsByClassName('bground').item(0);
 const modalForm = modalbg.querySelector('form');
 const checkBoxWithAnimate = modalForm.querySelectorAll('.checkbox-icon');
@@ -31,6 +25,24 @@ const inputTermsConditions = document.getElementById("checkbox1");
 // DOM location elements
 const locations = document.getElementById('locations');
 const locationsGroup = document.getElementById('locationsGroup');
+
+// ---------------------------------------------------------------------------------------------------------
+// navigation
+// ---------------------------------------------------------------------------------------------------------
+
+// change navigation
+function editNav() {
+  if (topNav.className === "topnav") {
+    topNav.className += " responsive";
+  } else {
+    topNav.className = "topnav";
+  }
+}
+
+// close navigation bar
+function closeNav () {
+  topNav.className = "topnav";
+}
 
 // ---------------------------------------------------------------------------------------------------------
 // add listeners to DOM elements
