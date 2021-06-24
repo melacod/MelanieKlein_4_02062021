@@ -550,7 +550,7 @@ footer {
   }
 
   .hero-img > img {
-    height: 320px max;
+    max-height: 320px;
     object-fit: cover;
     margin-top: 40px;
     position: unset;

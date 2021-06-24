@@ -112,7 +112,7 @@ function validate () {
   const isValid = true;//validateAll();
   if (isValid) {
     disableLocations();
-    displaySucessModalDialog();
+    displaySuccessModalDialog();
   }
   return false;
 }
