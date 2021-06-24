@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------------------------------------------------
 
 // DOM menu element
-const topNav = document.getElementById("myTopnav");
+const topNav = document.getElementById('myTopnav');
 
 // DOM modal elements
 const modalbg = document.getElementsByClassName('bground').item(0);
@@ -14,11 +14,11 @@ const modalOpenButtons = document.getElementsByClassName('modal-open');
 const modalCloseButtons = document.getElementsByClassName('modal-close');
 
 // DOM inputs elements
-const inputFirst = document.getElementById("first");
-const inputLast = document.getElementById("last");
-const inputEmail = document.getElementById("email");
-const inputBirthdate = document.getElementById("birthdate");
-const inputQuantity = document.getElementById("quantity");
+const inputFirst = document.getElementById('first');
+const inputLast = document.getElementById('last');
+const inputEmail = document.getElementById('email');
+const inputBirthdate = document.getElementById('birthdate');
+const inputQuantity = document.getElementById('quantity');
 const inputLocations = document.getElementsByClassName('input-location');
 const inputTermsConditions = document.getElementById("checkbox1");
 
@@ -84,7 +84,7 @@ function closeModalDialog() {
 }
 
 // display modal dialog success message
-function displaySucessModalDialog() {
+function displaySuccessModalDialog() {
   checkBoxWithAnimate.forEach( function (e) {
     e.style.transitionDuration = "0s";
   });
