@@ -109,7 +109,7 @@ function resetFields () {
 
 // validate form
 function validate () {
-  const isValid = true;//validateAll();
+  const isValid = validateAll();
   if (isValid) {
     disableLocations();
     displaySuccessModalDialog();
@@ -267,10 +267,11 @@ function uncheckAllLocations () {
 function validateLocations () {
   removeValidationClasses(locationsGroup);
   
+  // calculate number of location checked
   let numberOfLocationsChecked = 0;
   for (let location of inputLocations){
     if (location.checked){
-      numberOfLocationsChecked++;
+      numberOfLocationsChecked ++;
     }
   }
 
